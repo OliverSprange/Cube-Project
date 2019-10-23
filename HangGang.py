@@ -3,10 +3,9 @@
 #  The code has been modified by Oliver Sprange to suit the needs for our group project.
 #  Modifications include a hint system, and minor changes to turns etc.
 
-
+import random  # The random function will allow us to choose a random word from a list
 
 def HangManGame():
-    import random  # The random function will allow us to choose a random word from a list
     
     words_hints = (('monty', 'Whose surname is Python?'),
                 ('subnet', 'A logical subdivision of an IP network'),
