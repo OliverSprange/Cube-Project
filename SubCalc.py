@@ -306,7 +306,7 @@ def subDet(x, y):  # Defining the detention function - x is tries, and y is ques
             guess = input("Please type your answer here:\n")
 
             if guess == answerDet:
-                print("Success - Succeeded")
+                print("Correct")
 
             elif guess != answerDet:
                 print("You've entered a wrong answer.")
@@ -317,7 +317,7 @@ def subDet(x, y):  # Defining the detention function - x is tries, and y is ques
             subCalc()
             guess = input("Please type your answer here:\n")
             if guess == answerDet:
-                print("Success - Succeeded")
+                print("Correct")
                 correctDet += 1
                 print("You have this many questions to go: ", (correctTgt-correctDet))
                 break
@@ -329,7 +329,7 @@ def subDet(x, y):  # Defining the detention function - x is tries, and y is ques
                 break
         if correctDet == correctTgt:
             print("Congratulations, you've successfully answered", correctTgt, "questions in a row - you may now leave.")
-            break
+            continue
 
 
 def subChall():
@@ -364,7 +364,7 @@ def subChall():
             guess = input("Please type your answer here:\n")
 
             if guess == answer:
-                print("Success - Succeeded")
+                print("Correct")
                 question_counter -= 1
                 print("Questions left: ", question_counter)
                 break
@@ -375,7 +375,6 @@ def subChall():
                     tries -= 1
                     lives = 3
                     print("You've lost, and will be sent to detention.")
-                    print("You have", tries, "tries left.")
                     time.sleep(2)
                     if tries == 2:
                         subDet(tries, 5)
@@ -383,6 +382,11 @@ def subChall():
                         subDet(tries, 10)
                     elif tries == 0:
                         subDet(tries, 15)
+                    time.sleep(1)
+                    print("I see you made it back from the detention - Welcome")
+                    time.sleep(1)
+                    print()
+                    print("You have", tries, "tries left.")
                     break
                 else:
                     print("Incorrect answer - try again")
@@ -390,4 +394,4 @@ def subChall():
                     continue
         if question_counter == 0:
             print("Congratulations, you've successfully answered 5 questions - you may now leave.")
-            break
+            continue
