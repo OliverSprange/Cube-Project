@@ -2,7 +2,9 @@ import ipaddress
 import random
 import time
 
-
+#  The following code has been inspired by user chills42 from the following site
+#  https://stackoverflow.com/questions/319279/how-to-validate-ip-address-in-python
+#  The code is modified by Oliver Sprange to suit the needs of our project
 def validate_ip(self):  # Here I am defining the function, that will check the validity of the users input
 
     a = self.split('.')
@@ -32,13 +34,13 @@ def subCalc():  # Here I am defining the subnet calculator which will be impleme
             answer = str(input("Would you like to input a subnet prefix, or the whole netmask? prefix/netmask\n"))
         except ValueError:
             continue
-        if not answer.lower() == "prefix":
+        if not answer.lower() == "prefix":  # If the user doesnt give the correct input, user will be prompted once again
             if not answer.lower() == "netmask":
                 print("Please input 'prefix' or 'netmask' for me to understand.")
                 continue
             else:
                 netmask = input("Type your netmask here: ")
-                if validate_ip(netmask):
+                if validate_ip(netmask):  # Using the validate_ip to validate netmask, which leaves the system prone to error
                     ip_pref = (sum(bin(int(x)).count('1') for x in netmask.split('.')))
                     checkNetmask = ""
                     checkNetmask = ip_addr + ("/" + str(ip_pref))
@@ -62,17 +64,17 @@ def subCalc():  # Here I am defining the subnet calculator which will be impleme
             break
 
 
-    ip_pref2 = "/" + str(ip_pref)
+    ip_pref2 = "/" + str(ip_pref)  # This puts a / in front of the prefix, which makes it a valid prefix for the ipaddress lib
 
-    ip_input = (ip_addr + ip_pref2)
+    ip_input = (ip_addr + ip_pref2)  # This conjoins the ipaddress and the prefix
 
-    net4 = ipaddress.IPv4Network(ip_input, False)
+    net4 = ipaddress.IPv4Network(ip_input, False)  # This assigns the ip_input to the net4 variable as an IPv4 address
 
-    first_validhost = str(net4[1])
+    first_validhost = str(net4[1])  = Variable for showing the first valid host
 
-    last_validhost = str(net4[-2])
+    last_validhost = str(net4[-2])  = Variable for showing the last valid host
 
-
+#  Below are a lot of print functions, which gives the user information about the network
     print("Your subnet mask is: ", net4.netmask)
 
     print("Your total amount of host addresses are: ", net4.num_addresses)
@@ -129,7 +131,7 @@ def subCalc():  # Here I am defining the subnet calculator which will be impleme
 
             break
 
-    while True:
+    while True:  # Asking the user if they want a list of all available networks (Not advisable)
 
         try:
 
@@ -161,7 +163,7 @@ def subCalc():  # Here I am defining the subnet calculator which will be impleme
 
             break
 
-    while True:
+    while True:  # Prompting the user if they want the first and last valid host on the network - using the variables on 73 and 75
 
         try:
 
