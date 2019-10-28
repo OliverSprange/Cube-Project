@@ -9,7 +9,7 @@
 
 import random  # The random function will allow us to choose a random word from a list
 
-
+#  Making multiple tuples, containing the words and hints
 def HangManGame():
     words_hints = (('monty', 'Whose surname is Python?'),
 
@@ -53,17 +53,17 @@ def HangManGame():
                    ('inheritance',
                     'The ability of an object to take on one or more characteristics from other classes.'))
 
-    word_tuple = random.choice(words_hints)
+    word_tuple = random.choice(words_hints)  # Choosing a random tuple from the words_lists
 
-    word = word_tuple[0]  # Var that picks a random word from the "words_hints"-list
+    word = word_tuple[0]  # Var that picks the words from the beforementioned tuple
 
     hint = word_tuple[1]  # Var that picks the according hint to the word
 
     print('Guess the characters: ')
 
-    guesses = ''
+    guesses = ''  # Variable that contains the users guesses
 
-    turns = 6
+    turns = 6  # Counter that counts down the users turns
 
     while turns > 0:
 
@@ -90,20 +90,20 @@ def HangManGame():
 
         while True:
             try:
-                guess = input('Guess a character: ').lower()
+                guess = input('Guess a character: ').lower()  # Prompting user for input, and converting to lowercase
             except:
                 continue
 
-            if len(guess) > 1:
+            if len(guess) > 1:  # Making sure, the user doesn't input multiple letters, thus being able to win in one move
                 print("One character please.")
                 continue
             else:
                 break
 
-        guesses += guess
+        guesses += guess  # Assign guess to guesses var
 
 
-        if guess.isalpha():
+        if guess.isalpha():  # Making sure the users input is a alphabetical character
 
             if guess not in word:
 
@@ -113,10 +113,10 @@ def HangManGame():
 
                 print('You have', + turns, 'more guesses')
 
-                if turns <= 2 and turns != 0:
+                if turns <= 2 and turns != 0:  # Conditional statement, that prints [1] from the tuple, which is the hint var
                     print("Here is a hint: ", hint)
 
-        else:
+        else:  # Punishing the user for trying to input anything else that alphabetical characters
 
             if guess not in word:
 
@@ -129,5 +129,5 @@ def HangManGame():
                 if turns <= 2 and turns != 0:
                     print("Here is a hint: ", hint)
 
-            if turns == 0:
+            if turns == 0:  # Prompting user that they have lost, once the turns var == 0
                 print('You lost.')
