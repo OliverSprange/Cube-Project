@@ -279,12 +279,12 @@ questions_answers = (('What is the broadcast address of the network 172.21.213.1
                     ('What is the first valid host on the subnetwork that the node 172.26.197.148/26 belongs to?', '172.26.197.129'))
 
 
-def subDet(x, y):  # Defining the detention function - x is tries, and y is question counter
+def subDet(x, y):  # Defining the detention function - x is tries, and y is the target for correct questions in a row
     triesDet = x
     correctDet = 0
     correctTgt = y
 
-    if triesDet != 0:
+    if triesDet != 0:  # Conditional statement that prints a introtext if the user has more than 0 tries left
         print("Welcome to the detention.")
         time.sleep(1)
         print("Here you must answer", correctTgt, "subnetting questions correct in a row.")
@@ -298,11 +298,11 @@ def subDet(x, y):  # Defining the detention function - x is tries, and y is ques
         time.sleep(1)
 
     while correctDet is not correctTgt:
-        word_subDet = random.choice(questions_answers)
-        questionDet = word_subDet[0]
-        answerDet = word_subDet[1]
+        word_subDet = random.choice(questions_answers)  # Picking a question and answer from the tuples list
+        questionDet = word_subDet[0]  # Assigning the first value of the tuple to the question var
+        answerDet = word_subDet[1]  # Assigning the secong value of the tuple to the answer var
 
-        if triesDet == 0:
+        if triesDet == 0:  # Asking the user a question, and never incrementing the tries counter, thus user is stuck in loop
             print(questionDet)
             time.sleep(1)
             guess = input("Please type your answer here:\n")
@@ -313,7 +313,7 @@ def subDet(x, y):  # Defining the detention function - x is tries, and y is ques
             elif guess != answerDet:
                 print("You've entered a wrong answer.")
 
-        while True and triesDet != 0:
+        while True and triesDet != 0:  # Asking question and incrementing correct counter by 1 if input == answer
             print(questionDet)
             time.sleep(1)
             subCalc()
@@ -324,23 +324,24 @@ def subDet(x, y):  # Defining the detention function - x is tries, and y is ques
                 print("You have this many questions to go: ", (correctTgt-correctDet))
                 break
 
-            elif guess != answerDet:
+            elif guess != answerDet:  # If input is incorrect, reset correct counter
                 correctDet = 0
                 correctTgt = y
                 print("You've entered a wrong answer - the counter has reset, and you must answer", correctTgt, "correct in a row.")
                 break
-        if correctDet == correctTgt:
+        if correctDet == correctTgt:  # If correct in a row == target the user wins
             print("Congratulations, you've successfully answered", correctTgt, "questions in a row - you may now leave.")
             continue
 
 
 def subChall():
 
-    lives = 3
-    tries = 3
-    correct = 0
-    question_counter = 5
+    lives = 3  # How many lives the user has
+    tries = 3  # How many tries the user has
+    correct = 0  # Counter for amount of correct answers
+    question_counter = 5  # Required correct answers to win
 
+  # Printing the intro
     print("Welcome to the Subnet challenge.\nHere you will be presented with a question, and you must type in your "
           "answer.")
     time.sleep(1)
@@ -357,28 +358,28 @@ def subChall():
     print("You will be answering subnetting questions for all of your eternal text-based life.")
     time.sleep(2)
 
-    for x in range(5):
-        word_sub = random.choice(questions_answers)
-        question = word_sub[0]
-        answer = word_sub[1]
+    for x in range(5):  # For loop, because it is 5 different questions we want from the tuples list
+        word_sub = random.choice(questions_answers)  # Picking a question and answer from the tuples list
+        question = word_sub[0]  # Assigning the first value of the tuple to the question var
+        answer = word_sub[1]  # Assigning the secong value of the tuple to the answer var
         while True:
             print(question)
             guess = input("Please type your answer here:\n")
 
-            if guess == answer:
+            if guess == answer:  # If input == answer, reduce amount of questions left to answer correct.
                 print("Correct")
                 question_counter -= 1
                 print("Questions left: ", question_counter)
                 break
 
-            elif guess != answer:
+            elif guess != answer:  #If answer is incorrect, reduce lives by 1
                 lives -= 1
-                if lives == 0:
+                if lives == 0:  # If lives == 0, tries will be reduced by 1, and lives reset to 3 and user is sent to detention
                     tries -= 1
                     lives = 3
                     print("You've lost, and will be sent to detention.")
                     time.sleep(2)
-                    if tries == 2:
+                    if tries == 2:  # Depending on tries left, the amount of questions the user has to answer correct increases
                         subDet(tries, 5)
                     elif tries == 1:
                         subDet(tries, 10)
@@ -391,9 +392,9 @@ def subChall():
                     print("You have", tries, "tries left.")
                     break
                 else:
-                    print("Incorrect answer - try again")
+                    print("Incorrect answer - try again")  #Informing user input was wrong, and show them how many lives are left
                     print("lives left:", lives)
                     continue
-        if question_counter == 0:
+        if question_counter == 0:  # If the user has to answer no more questions, they win
             print("Congratulations, you've successfully answered 5 questions - you may now leave.")
             continue
